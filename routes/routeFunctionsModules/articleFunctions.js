@@ -19,7 +19,7 @@ module.exports = (() => {
     if (checkTitleInput(req.body) && Articles.editByTitle(req.path.slice(1), req.body)) {
       res.redirect(`/articles/${encodeTitle(req.body.title)}`);
     } else {
-      res.redirect(`/article${req.path}/edit`);
+      res.redirect(`/articles${req.path}/edit`);
     }
   };
 
@@ -27,7 +27,7 @@ module.exports = (() => {
     if (checkTitleInput(req.body) && Articles.removeByTitle(req.path.slice(1))) {
       res.redirect('/articles');
     } else {
-      res.redirect(`/article/${req.path.slice(1)}`);
+      res.redirect(`/articles/${req.path.slice(1)}`);
     }
   };
 

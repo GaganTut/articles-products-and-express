@@ -24,7 +24,7 @@ module.exports = (() => {
   };
 
   const prodDelete = (req, res) => {
-    if (checkIdInput(req.body) && Products.removeByID(req.path.slice(1))) {
+    if (req.body.id === req.path.slice(1) && Products.removeByID(req.path.slice(1))) {
       res.redirect('/products');
     } else {
       res.redirect(`/products/${req.path.slice(1)}`);
@@ -53,6 +53,14 @@ const createID = () => {
 };
 
 const checkIdInput = (reqBody) => {
+  if (reqBody.hasOwnProperty('name') || reqBody.hasOwnProperty('price') || reqBody.hasOwnProperty('inventory')) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const checkDeleteInput = (reqBody) => {
   if (reqBody.hasOwnProperty('id')) {
     return true;
   } else {
