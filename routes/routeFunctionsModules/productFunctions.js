@@ -60,14 +60,6 @@ const checkIdInput = (reqBody) => {
   }
 };
 
-const checkDeleteInput = (reqBody) => {
-  if (reqBody.hasOwnProperty('id')) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
 const filterExtraProps = (reqBody) => {
   return {
     name: reqBody.name,
