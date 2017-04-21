@@ -18,7 +18,7 @@ module.exports = (() => {
 
   const artPut = (req, res) => {
     if (checkTitleInput(req.body) && Articles.editByTitle(req.path.slice(1), req.body)) {
-      res.redirect(`articles${req.path}`);
+      res.redirect(`/articles${req.path}`);
     } else {
       res.redirect(`/article${req.path}/edit`);
     }
