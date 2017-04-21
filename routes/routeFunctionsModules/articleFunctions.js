@@ -1,5 +1,4 @@
 /*jshint esversion: 6*/
-const exphbs = require('express-handlebars');
 const Articles = require('../../db/Articles.js');
 
 module.exports = (() => {
@@ -18,7 +17,7 @@ module.exports = (() => {
 
   const artPut = (req, res) => {
     if (checkTitleInput(req.body) && Articles.editByTitle(req.path.slice(1), req.body)) {
-      res.redirect(`/articles${req.path}`);
+      res.redirect(`/articles/${encodeTitle(req.body.title)}`);
     } else {
       res.redirect(`/article${req.path}/edit`);
     }
@@ -68,21 +67,4 @@ const filterExtraProps = (reqBody) => {
     author: reqBody.author,
     urlTitle: reqBody.urlTitle
   };
-};
-
-const editArticle = (reqBody) => {
-  for (let i = 0; i < articlesList.length; i++) {
-    if (articlesList[i].title === reqBody.title) {
-      updateArticle(articlesList[i], reqBody.body);
-    }
-  }
-};
-
-const updateArticle = (ogArt, updBod) => {
-  if (updBod.body !== undefined) {
-    ogArt.body = updBod.body;
-  }
-  if (updBod.author !== undefined) {
-    ogArt.author = updBod.author;
-  }
 };

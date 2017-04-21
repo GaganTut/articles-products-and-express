@@ -4,6 +4,8 @@
   <div class="articles">
     <h2>{{title}}</h2>
     <p>Author: {{author}}</p>
-    <p>{{body}}</p>
+    <form action="/articles/{{urlTitle}}" method="get" accept-charset="utf-8">
+      <button type="submit">Go To Article</button>
+    </form>
   </div>
 {{/each}}

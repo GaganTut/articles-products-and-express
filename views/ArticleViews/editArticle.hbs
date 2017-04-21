@@ -1,5 +1,5 @@
-<h1>WRITE AN ARTICLE</h1>
-<form action="http://localhost:8888/articles" method="post">
+<h1>Edit AN ARTICLE</h1>
+<form action="/articles{{title}}?_method=PUT" method="post">
   Title: <input type="text" name="title"><br>
   Author: <input type="text" name="author"><br>
   Body: <input type="text" name="body"><br>
