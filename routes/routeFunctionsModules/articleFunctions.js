@@ -1,33 +1,34 @@
 /*jshint esversion: 6*/
-
-const articlesList = [];
+const exphbs = require('express-handlebars');
+const Articles = require('../../db/Articles.js');
 
 module.exports = (() => {
   const artPost = (req, res) => {
     if (checkPostInput(req.body)) {
       req.body.urlTitle = encodeTitle(req.body.title);
-      articlesList.push(filterExtraProps(req.body));
-      res.redirect(200, '/articles');
+      if (Articles.addArticle(filterExtraProps(req.body))) {
+        res.redirect('/articles');
+      } else {
+        res.redirect('/articles/new');
+      }
     } else {
-      res.redirect('/articles');
+      res.redirect('/articles/new');
     }
   };
 
   const artPut = (req, res) => {
-    if (checkTitleInput(req.body)) {
-      editArticle(req.body);
-      res.redirect(`articles/${req.body.title}`);
+    if (checkTitleInput(req.body) && Articles.editByTitle(req.path.slice(1), req.body)) {
+      res.redirect(`articles${req.path}`);
     } else {
-      res.redirect(`/article/${req.body.title}/edit`);
+      res.redirect(`/article${req.path}/edit`);
     }
   };
 
   const artDelete = (req, res) => {
-    if (checkTitleInput(req.body)) {
-      deleteArticle(req.body.title);
+    if (checkTitleInput(req.body) && Articles.removeByTitle(req.path.slice(1))) {
       res.redirect('/articles');
     } else {
-      res.redirect(`/article/${req.body.title}`);
+      res.redirect(`/article/${req.path.slice(1)}`);
     }
   };
 

@@ -2,10 +2,18 @@
 const express = require('express');
 const articlesRoute = require('./routes/articles.js');
 const bodyParser = require('body-parser');
+const exphbs = require('express-handlebars');
 const app = express();
 const PORT = 8888;
 
-app.use(express.static('public'));
+const hbs = exphbs.create({
+  extname: '.hbs',
+  defaultLayout: 'main'
+});
+
+app.engine('hbs', hbs.engine);
+app.set('view engine', 'hbs');
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use('/articles', articlesRoute);
 
