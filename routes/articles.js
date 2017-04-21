@@ -14,7 +14,7 @@ router.route('/')
 
 router.route('/new')
   .get((req, res) => {
-    res.render('newArticles.hbs');
+    res.render('newArticle');
   });
 
 router.route('/:title')
