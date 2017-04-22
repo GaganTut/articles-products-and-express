@@ -1,5 +1,9 @@
 <h1>All Current Articles</h1>
 
+{{#if articles}}
+<div class="notFound">NO ARTICLES FOUND</div>
+{{/if}}
+
 {{#each articles}}
   <div class="articles">
     <h2>{{title}}</h2>

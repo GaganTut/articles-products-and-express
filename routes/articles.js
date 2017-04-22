@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.route('/')
   .get((req, res) => {
+    console.log(Articles.getList());
     res.render('ArticleViews/allArticles', {articles: Articles.getList()});
   })
   .post((req, res) => {
@@ -18,7 +19,7 @@ router.route('/new')
   });
 
 router.get('/:title/edit', (req, res) => {
-    res.render('ArticleViews/editArticle', {title: req.params.title});
+    res.render('ArticleViews/editArticle', {article: Articles.getByTitle(req.params.title), title: req.params.title});
 });
 
 router.route('/:title')

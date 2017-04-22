@@ -4,6 +4,9 @@ module.exports = (() => {
   const Articles = [];
 
   const getList = () => {
+    if (Articles.length < 1) {
+      return true;
+    }
     return Articles;
   };
 
@@ -31,7 +34,7 @@ module.exports = (() => {
         return Articles[i];
       }
     }
-    return false;
+    return {'notFound': true};
   };
 
   const editByTitle = (title, newArtInfo) => {

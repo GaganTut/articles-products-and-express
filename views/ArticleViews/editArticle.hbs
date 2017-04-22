@@ -1,8 +1,8 @@
 <h1>Edit AN ARTICLE</h1>
 <form action="/articles{{title}}?_method=PUT" method="post">
-  Title: <input type="text" name="title"><br>
-  Author: <input type="text" name="author"><br>
-  Body: <input type="text" name="body"><br>
+  Title: <input type="text" name="title" value='{{article.title}}'><br>
+  Author: <input type="text" name="author" value='{{article.author}}'><br>
+  Body: <input type="textarea" name="body" value='{{article.body}}'><br>
   <input type="submit" value="Submit">
 </form>
 
