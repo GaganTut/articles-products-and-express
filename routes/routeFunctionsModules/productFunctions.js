@@ -41,7 +41,7 @@ module.exports = (() => {
 
 
 const checkPostInput = (reqBody) => {
-  if (reqBody.hasOwnProperty('name') && reqBody.hasOwnProperty('price') && reqBody.hasOwnProperty('inventory')) {
+  if (reqBody.hasOwnProperty('name') && reqBody.hasOwnProperty('price') && reqBody.hasOwnProperty('inventory') && typeof reqBody.price === 'number' && typeof reqBody.inventory === 'number') {
     return true;
   } else {
     return false;

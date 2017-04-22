@@ -40,10 +40,10 @@ module.exports = (() => {
         if (newProdInfo.name !== undefined) {
           Products[i].name = newProdInfo.name;
         }
-        if (newProdInfo.price !== undefined) {
+        if (newProdInfo.price !== undefined && typeof newProdInfo.price === 'number') {
           Products[i].price = newProdInfo.price;
         }
-        if (newProdInfo.inventory !== undefined) {
+        if (newProdInfo.inventory !== undefined && typeof newProdInfo.inventory === 'number') {
           Products[i].inventory = newProdInfo.inventory;
         }
 
