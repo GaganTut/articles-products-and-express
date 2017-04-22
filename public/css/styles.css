@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Bree+Serif");
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -47,16 +48,63 @@ table {
 
 body {
   background-color: #FFF;
-  width: 100%;
-  height: 100%;
+  color: #FFF;
   display: flex;
-  flex-direction: column;
-  align-items: center; }
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-family: "Bree Serif";
+  height: 100%;
+  justify-content: center;
+  width: 100%; }
   body .titles {
-    background-color: #5ae8ed;
-    width: 75%;
-    height: 40%; }
-  body #products {
-    background-color: #f4d0d0;
+    background-color: blue;
+    border-radius: 75%;
+    font-size: 800%;
+    line-height: 200%;
+    margin: 4%;
+    text-align: center;
+    width: 75%; }
+  body #products-title, body #articles-title {
+    background-color: red;
     font-size: 500%;
-    text-align: center; }
+    line-height: 150%;
+    margin: 4%;
+    text-align: center;
+    width: 75%; }
+  body .sub-titles {
+    background-color: blue;
+    border-radius: 75%;
+    font-size: 400%;
+    line-height: 150%;
+    margin: 4%;
+    text-align: center;
+    width: 75%; }
+  body .notFound {
+    background-color: red;
+    font-size: 500%;
+    line-height: 150%;
+    margin: 4%;
+    text-align: center;
+    width: 75%; }
+  body .articles {
+    background-color: red;
+    display: flex;
+    font-size: 200%;
+    justify-content: space-around;
+    line-height: 200%;
+    margin: 1%;
+    text-align: center;
+    width: 75%; }
+    body .articles button {
+      background-color: red;
+      border: 0.5% solid blue;
+      box-shadow: 1% 1% 1% #d9fbfc;
+      color: white; }
+  body .linkButtons {
+    background-color: red;
+    color: white;
+    font-size: 500%;
+    line-height: 150%;
+    margin: 4%;
+    text-align: center;
+    width: 75%; }

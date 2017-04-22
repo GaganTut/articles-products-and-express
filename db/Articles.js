@@ -4,9 +4,6 @@ module.exports = (() => {
   const Articles = [];
 
   const getList = () => {
-    if (Articles.length < 1) {
-      return true;
-    }
     return Articles;
   };
 

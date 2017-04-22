@@ -1,12 +1,14 @@
-<h1>All Current Articles</h1>
+<div class="sub-titles">
+  <h1>All Current Articles</h1>
+</div>
 
-{{#if articles}}
-<div class="notFound">NO ARTICLES FOUND</div>
-{{/if}}
+{{#unless articles}}
+  <div class="notFound">NO ARTICLES FOUND</div>
+{{/unless}}
 
 {{#each articles}}
   <div class="articles">
-    <h2>{{title}}</h2>
+    <h2>Title: {{title}}</h2>
     <p>Author: {{author}}</p>
     <form action="/articles/{{urlTitle}}" method="get" accept-charset="utf-8">
       <button type="submit">Go To Article</button>

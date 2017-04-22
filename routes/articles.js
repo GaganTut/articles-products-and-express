@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.route('/')
   .get((req, res) => {
-    console.log(Articles.getList());
     res.render('ArticleViews/allArticles', {articles: Articles.getList()});
   })
   .post((req, res) => {
