@@ -18,12 +18,12 @@ router.route('/new')
   });
 
 router.get('/:title/edit', (req, res) => {
-    res.render('ArticleViews/editArticle', {title: req.path.slice(0, -5)});
+    res.render('ArticleViews/editArticle', {title: req.params.title});
 });
 
 router.route('/:title')
   .get((req, res) => {
-    res.render('ArticleViews/singleArticle', Articles.getByTitle(req.path.slice(1)));
+    res.render('ArticleViews/singleArticle', Articles.getByTitle(req.params.title));
   })
   .put((req,res) => {
     artFuncs.artPut(req, res);

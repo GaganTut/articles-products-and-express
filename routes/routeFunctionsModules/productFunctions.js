@@ -24,10 +24,10 @@ module.exports = (() => {
   };
 
   const prodDelete = (req, res) => {
-    if (req.body.id === req.path.slice(1) && Products.removeByID(req.path.slice(1))) {
+    if (req.body.id === req.params.id && Products.removeByID(req.params.id)) {
       res.redirect('/products');
     } else {
-      res.redirect(`/products/${req.path.slice(1)}`);
+      res.redirect(`/products/${req.params.id}`);
     }
   };
 
@@ -41,7 +41,11 @@ module.exports = (() => {
 
 
 const checkPostInput = (reqBody) => {
-  if (reqBody.hasOwnProperty('name') && reqBody.hasOwnProperty('price') && reqBody.hasOwnProperty('inventory') && typeof reqBody.price === 'number' && typeof reqBody.inventory === 'number') {
+  if (reqBody.hasOwnProperty('name') &&
+      reqBody.hasOwnProperty('price') &&
+      reqBody.hasOwnProperty('inventory') &&
+      typeof reqBody.price === 'number' &&
+      typeof reqBody.inventory === 'number') {
     return true;
   } else {
     return false;
@@ -49,11 +53,13 @@ const checkPostInput = (reqBody) => {
 };
 
 const createID = () => {
-  return `id${new Date() - 2222}`;
+  return `id${parseInt(new Date() / 500)}`;
 };
 
 const checkIdInput = (reqBody) => {
-  if (reqBody.hasOwnProperty('name') || reqBody.hasOwnProperty('price') || reqBody.hasOwnProperty('inventory')) {
+  if (reqBody.hasOwnProperty('name') ||
+      reqBody.hasOwnProperty('price') ||
+      reqBody.hasOwnProperty('inventory')) {
     return true;
   } else {
     return false;

@@ -20,12 +20,12 @@ router.route('/new')
   });
 
 router.get('/:id/edit', (req, res) => {
-    res.render('productViews/editProduct', {id: req.path.slice(0, -5)});
+    res.render('productViews/editProduct', {id: req.params.id});
 });
 
 router.route('/:id')
   .get((req, res) => {
-    res.render('productViews/singleProduct', Products.getByID(req.path.slice(1)));
+    res.render('productViews/singleProduct', Products.getByID(req.params.id));
   })
   .put((req,res) => {
     prodFuncs.prodPut(req, res);

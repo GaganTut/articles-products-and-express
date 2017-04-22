@@ -18,7 +18,7 @@ app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
-app.use('/', analyticsLog);
+app.use(analyticsLog);
 
 app.use(express.static('public'));
 app.use('/articles', articlesRoute);
@@ -27,5 +27,8 @@ app.get('/',(req, res) => {
   res.render('home');
 });
 
+app.get('*', function(req, res){
+  res.render('error404');
+});
 
 const server = app.listen(PORT);

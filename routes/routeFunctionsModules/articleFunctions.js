@@ -16,10 +16,10 @@ module.exports = (() => {
   };
 
   const artPut = (req, res) => {
-    if (checkTitleInput(req.body) && Articles.editByTitle(req.path.slice(1), req.body)) {
+    if (checkTitleInput(req.body) && Articles.editByTitle(req.params.title, req.body)) {
       res.redirect(`/articles/${encodeTitle(req.body.title)}`);
     } else {
-      res.redirect(`/articles${req.path}/edit`);
+      res.redirect(`/articles/${req.params.title}/edit`);
     }
   };
 
@@ -27,7 +27,7 @@ module.exports = (() => {
     if (checkTitleInput(req.body) && Articles.removeByTitle(req.path.slice(1))) {
       res.redirect('/articles');
     } else {
-      res.redirect(`/articles/${req.path.slice(1)}`);
+      res.redirect(`/articles/${req.params.title}`);
     }
   };
 
@@ -41,7 +41,9 @@ module.exports = (() => {
 
 
 const checkPostInput = (reqBody) => {
-  if (reqBody.hasOwnProperty('title') && reqBody.hasOwnProperty('body') && reqBody.hasOwnProperty('author')) {
+  if (reqBody.hasOwnProperty('title') &&
+      reqBody.hasOwnProperty('body') &&
+      reqBody.hasOwnProperty('author')) {
     return true;
   } else {
     return false;
@@ -49,7 +51,7 @@ const checkPostInput = (reqBody) => {
 };
 
 const encodeTitle = (title) => {
-  return title.split(' ').join('%20');
+  return title.split(' ').join('-');
 };
 
 const checkTitleInput = (reqBody) => {

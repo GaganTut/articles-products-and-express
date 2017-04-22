@@ -46,7 +46,7 @@ module.exports = (() => {
         if (newArtInfo.author !== undefined) {
           Articles[i].author = newArtInfo.author;
         }
-        Articles[i].urlTitle = Articles[i].title.split(' ').join('%20');
+        Articles[i].urlTitle = Articles[i].title.split(' ').join('-');
 
         return true;
       }
