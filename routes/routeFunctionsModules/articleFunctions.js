@@ -2,25 +2,44 @@
 const Articles = require('../../db/Articles.js');
 
 module.exports = (() => {
-  const artPost = (req, res) => {
-    if (checkPostInput(req.body)) {
-      req.body.urlTitle = encodeTitle(req.body.title);
-      if (Articles.addArticle(filterExtraProps(req.body))) {
+  const getAllArticles = (req, res) => {
+    Articles.getList()
+      .then(artArray => {
+        res.render('articleViews/allArticles', {products: artArray});
+      })
+      .catch(error => {
+        res.render('articleViews/allArticles', {products: artArray});
+      });
+  };
+
+  const getSingleArticle = (req, res) => {
+    ARticles.getByTitle(req.params.title)
+      .then(data => {
+        res.render('articleViews/singleArticle', data[0]);
+      })
+      .catch(() => {
         res.redirect('/articles');
-      } else {
+      });
+  };
+
+  const artPost = (req, res) => {
+    Articles.addArticle(req.body)
+      .then(() => {
+        res.redirect('/articles');
+      })
+      .catch(() => {
         res.redirect('/articles/new');
-      }
-    } else {
-      res.redirect('/articles/new');
-    }
+      });
   };
 
   const artPut = (req, res) => {
-    if (checkTitleInput(req.body) && Articles.editByTitle(req.params.title, req.body)) {
-      res.redirect(`/articles/${encodeTitle(req.body.title)}`);
-    } else {
-      res.redirect(`/articles/${req.params.title}/edit`);
-    }
+    Articles.editByTitle(unEncode(req.params.title), req.body)
+      .then(() => {
+        res.redirect(`/articles/${encodeTitle(req.body.title)}`);
+      })
+      .catch(() => {
+        res.redirect(`/articles/${req.params.title}/edit`);
+      });
   };
 
   const artDelete = (req, res) => {
