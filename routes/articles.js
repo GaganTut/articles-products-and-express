@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.route('/')
   .get((req, res) => {
-    res.render('ArticleViews/allArticles', {articles: Articles.getList()});
+    artFuncs.getAllArticles(req, res);
   })
   .post((req, res) => {
     artFuncs.artPost(req, res);
@@ -18,12 +18,12 @@ router.route('/new')
   });
 
 router.get('/:title/edit', (req, res) => {
-    res.render('ArticleViews/editArticle', {article: Articles.getByTitle(req.params.title), title: req.params.title});
+    artFuncs.editArtPage(req, res);
 });
 
 router.route('/:title')
   .get((req, res) => {
-    res.render('ArticleViews/singleArticle', Articles.getByTitle(req.params.title));
+    artFuncs.getSingleArticle(req, res);
   })
   .put((req,res) => {
     artFuncs.artPut(req, res);

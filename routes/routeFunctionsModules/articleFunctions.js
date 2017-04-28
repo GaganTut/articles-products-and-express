@@ -5,19 +5,23 @@ module.exports = (() => {
   const getAllArticles = (req, res) => {
     Articles.getList()
       .then(artArray => {
-        res.render('articleViews/allArticles', {products: artArray});
+        artArray.forEach(element => {
+          element.urlTitle = encodeTitle(element.title);
+        });
+        res.render('articleViews/allArticles', {articles: artArray});
       })
       .catch(error => {
-        res.render('articleViews/allArticles', {products: artArray});
+        res.render('articleViews/allArticles', {articles: artArray});
       });
   };
 
   const getSingleArticle = (req, res) => {
-    ARticles.getByTitle(req.params.title)
+    Articles.getByTitle(unEncode(req.params.title))
       .then(data => {
-        res.render('articleViews/singleArticle', data[0]);
+        data.urlTitle = encodeTitle(data.title);
+        res.render('articleViews/singleArticle', data);
       })
-      .catch(() => {
+      .catch(error => {
         res.redirect('/articles');
       });
   };
@@ -43,49 +47,41 @@ module.exports = (() => {
   };
 
   const artDelete = (req, res) => {
-    if (checkTitleInput(req.body) && Articles.removeByTitle(req.path.slice(1))) {
-      res.redirect('/articles');
+    if (req.body.title === unEncode(req.params.title)) {
+      Articles.removeByTitle(req.body.title)
+        .then(() => {
+          res.redirect('/articles');
+        })
+        .catch(error => {
+          res.redirect(`/articles/${req.params.title}`);
+        });
     } else {
       res.redirect(`/articles/${req.params.title}`);
     }
   };
 
+  const editArtPage = (req, res) => {
+    Articles.getByTitle(unEncode(req.params.title))
+      .then(data => {
+        res.render('articleViews/editArticle', data);
+      });
+  };
+
   return {
     artPost,
     artPut,
-    artDelete
+    artDelete,
+    getAllArticles,
+    getSingleArticle,
+    editArtPage
   };
 })();
 
 
-
-const checkPostInput = (reqBody) => {
-  if (reqBody.hasOwnProperty('title') &&
-      reqBody.hasOwnProperty('body') &&
-      reqBody.hasOwnProperty('author')) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
 const encodeTitle = (title) => {
-  return title.split(' ').join('-');
+  return title.split(' ').join('%20');
 };
 
-const checkTitleInput = (reqBody) => {
-  if (reqBody.hasOwnProperty('title')) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-const filterExtraProps = (reqBody) => {
-  return {
-    title: reqBody.title,
-    body: reqBody.body,
-    author: reqBody.author,
-    urlTitle: reqBody.urlTitle
-  };
+const unEncode = (title) => {
+  return title.split('%20').join(' ');
 };
