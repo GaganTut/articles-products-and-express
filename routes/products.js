@@ -6,15 +6,7 @@ const router = express.Router();
 
 router.route('/')
   .get((req, res) => {
-    Products.getInventory()
-      .then(prodArray => {
-        res.render('productViews/allProducts', {products: prodArray});
-      })
-      .catch(error => {
-        res.render('productViews/allProducts', {products: prodArray});
-      });
-  }).put((req, res) => {
-    prodFuncs.redirectPut(req, res);
+    prodFuncs.getAllProd(req, res);
   })
   .post((req, res) => {
     prodFuncs.prodPost(req, res);
@@ -27,18 +19,12 @@ router.route('/new')
 
 router.route('/:id/edit')
   .get((req, res) => {
-    Products.getByID(req.params.id)
-      .then(data => {
-        res.render('productViews/editProduct', data[0]);
-      });
+    prodFuncs.editProdPage(req, res);
   });
 
 router.route('/:id')
   .get((req, res) => {
-    Products.getByID(req.params.id)
-      .then(data => {
-        res.render('productViews/singleProduct', data[0]);
-      });
+    prodFuncs.getSingleProd(req, res);
   })
   .put((req,res) => {
     prodFuncs.prodPut(req, res);
