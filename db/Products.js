@@ -1,66 +1,53 @@
 /*jshint esversion: 6*/
+const pgp = require('pg-promise')();
+const cn = {
+  host: 'localhost',
+  port: 5432,
+  database: 'articles',
+  user: 'charles',
+};
+const db = pgp(cn);
+
 
 module.exports = (() => {
-  const Products = [];
 
   const getInventory = () => {
-    return Products;
+    return db.any('SELECT * FROM products', [true])
+      .catch(function(error) {
+          return false;
+      });
   };
 
   const addProduct = (prodInfo) => {
-    if(checkDuplicates(prodInfo.name)) {
-      Products.push(prodInfo);
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-  const checkDuplicates = (name) => {
-    for (let i = 0; i < Products.length; i++) {
-      if (Products[i].name === name) {
+    return db.none('INSERT INTO products(name, price, inventory) VALUES($1, $2, $3)',
+      [prodInfo.name, prodInfo.price, prodInfo.inventory])
+      .then(() => {
+        return true;
+      })
+      .catch(error => {
         return false;
-      }
-    }
-    return true;
+      });
   };
 
   const getByID = (id) => {
-    for (let i = 0; i < Products.length; i++) {
-      if(Products[i].id === id) {
-        return Products[i];
-      }
-    }
-    return false;
+    return db.any(`SELECT * FROM products WHERE id = $1`, [id])
+      .catch(function(error) {
+          return false;
+      });
   };
 
   const editByID = (id, newProdInfo) => {
-    for (let i = 0; i < Products.length; i++) {
-      if(Products[i].id === id) {
-        if (newProdInfo.name !== undefined) {
-          Products[i].name = newProdInfo.name;
-        }
-        if (newProdInfo.price !== undefined && typeof newProdInfo.price === 'number') {
-          Products[i].price = newProdInfo.price;
-        }
-        if (newProdInfo.inventory !== undefined && typeof newProdInfo.inventory === 'number') {
-          Products[i].inventory = newProdInfo.inventory;
-        }
-
-        return true;
-      }
-    }
-    return false;
+    return db.none(`UPDATE products SET name = $1, price = $2, inventory = $3, updated_at = now() WHERE id = $4`, [newProdInfo.name, newProdInfo.price, newProdInfo.inventory, id])
+    .catch(error => {
+      console.log(error);
+    });
   };
 
   const removeByID = (id) => {
-    for (let i = 0; i < Products.length; i++) {
-      if(Products[i].id === id) {
-        Products.splice(Products.indexOf(Products[i], 1));
-        return true;
-      }
-    }
-    return false;
+    return db.none(`DELETE FROM products WHERE id = $1`, [id])
+      .catch(error => {
+        return false;
+      });
   };
 
   return {
