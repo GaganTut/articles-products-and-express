@@ -1,12 +1,16 @@
-<h1>Edit A Product</h1>
-<form action="/products/{{id}}?_method=PUT" method="POST">
-  Name: <input type="text" name="name" value = "{{name}}"><br>
-  Price: <input type="text" name="price" value="{{price}}"><br>
-  Inventory: <input type="text" name="inventory" value="{{inventory}}"><br>
-  <input type="submit" value="Submit">
-</form>
+<div class="sub-titles">
+  <h1>Edit Product</h1>
+</div>
+<div class="edit-page">
+  <form action="/products/{{id}}?_method=PUT" method="POST">
+    Name: <input type="text" name="name" value = "{{name}}"><br>
+    Price: <input type="text" name="price" value="{{price}}"><br>
+    Inventory: <input type="text" name="inventory" value="{{inventory}}"><br>
+    <input type="submit" value="Submit">
+  </form>
 
-<form action="/products/{{id}}?_method=DELETE" method="post">
-  Type ID to confirm delete: <input type="text" name="id"><br>
-  <input type="submit" value="DELETE PRODUCT">
-</form>
+  <form action="/products/{{id}}?_method=DELETE" method="post">
+    Type ID to confirm delete: <input type="text" name="id"><br>
+    <input type="submit" value="DELETE PRODUCT">
+  </form>
+</div>

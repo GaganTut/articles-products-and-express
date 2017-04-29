@@ -1,9 +1,15 @@
-<h1>All Current Products</h1>
+<div class="sub-titles">
+  <h1>All Current Products</h1>
+</div>
+
+{{#unless products}}
+  <div class="notFound">NO ARTICLES FOUND</div>
+{{/unless}}
 
 {{#each products}}
-  <div class="products">
+  <div class="listView">
     <h2>{{name}}</h2>
-    <h3>Quantity {{inventory}}</h3>
+    <h3>Quantity: {{inventory}}</h3>
     <form action="/products/{{id}}" method="get" accept-charset="utf-8">
       <button type="submit">See Price</button>
     </form>

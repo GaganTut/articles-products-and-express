@@ -1,6 +1,6 @@
 body {
-  background-color: #FFF;
-  color: black;
+  background-color: #white;
+  color: $black;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -10,7 +10,7 @@ body {
   width: 100%;
 
   .titles {
-    background-color: blue;
+    background-color: $blue;
     border-radius: 75%;
     font-size: 800%;
     line-height: 200%;
@@ -20,7 +20,7 @@ body {
   }
 
   #products-title, #articles-title {
-    background-color: red;
+    background-color: $red;
     font-size: 500%;
     line-height: 150%;
     margin: 4%;
@@ -29,7 +29,7 @@ body {
   }
 
   .sub-titles {
-    background-color: blue;
+    background-color: $blue;
     border-radius: 75%;
     font-size: 400%;
     line-height: 150%;
@@ -39,7 +39,7 @@ body {
   }
 
   .notFound {
-    background-color: red;
+    background-color: $red;
     font-size: 500%;
     line-height: 150%;
     margin: 4%;
@@ -47,8 +47,8 @@ body {
     width: 75%;
   }
 
-  .articles {
-    background-color: red;
+  .listView {
+    background-color: $red;
     display: flex;
     font-size: 200%;
     justify-content: space-around;
@@ -58,16 +58,14 @@ body {
     width: 75%;
 
     button {
-      background-color: red;
-      border: 0.5% solid blue;
-      box-shadow: 1% 1% 1% $lightblue;
+      background-color: $red;
       color: white;
     }
   }
 
   .linkButtons {
-    background-color: red;
-    color: black;
+    background-color: $red;
+    color: $black;
     font-size: 500%;
     line-height: 150%;
     margin: 4%;
@@ -75,5 +73,14 @@ body {
     width: 75%;
   }
 
-
+  .single-view {
+    background-color: $red;
+    border-radius: 50%;
+    color: $black;
+    font-size: 500%;
+    line-height: 200%;
+    margin: 4%;
+    text-align: center;
+    width: 90%;
+  }
 }

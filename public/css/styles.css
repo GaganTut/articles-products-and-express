@@ -47,7 +47,7 @@ table {
   border-spacing: 0; }
 
 body {
-  background-color: #FFF;
+  background-color: #white;
   color: black;
   display: flex;
   flex-direction: row;
@@ -86,7 +86,7 @@ body {
     margin: 4%;
     text-align: center;
     width: 75%; }
-  body .articles {
+  body .listView {
     background-color: red;
     display: flex;
     font-size: 200%;
@@ -95,10 +95,8 @@ body {
     margin: 1%;
     text-align: center;
     width: 75%; }
-    body .articles button {
+    body .listView button {
       background-color: red;
-      border: 0.5% solid blue;
-      box-shadow: 1% 1% 1% #d9fbfc;
       color: white; }
   body .linkButtons {
     background-color: red;
@@ -108,3 +106,12 @@ body {
     margin: 4%;
     text-align: center;
     width: 75%; }
+  body .single-view {
+    background-color: red;
+    border-radius: 50%;
+    color: black;
+    font-size: 500%;
+    line-height: 200%;
+    margin: 4%;
+    text-align: center;
+    width: 90%; }

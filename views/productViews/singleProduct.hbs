@@ -1,10 +1,15 @@
-<h1>{{name}}</h1>
-<h3>{{price}}</h3>
-<h2>{{inventory}}</h2>
-<form action="/products" method="get" accept-charset="utf-8">
-  <button type='submit'>Back to Products List</button>
-</form>
+<div class="single-view">
+  <h1 class="title-name">{{name}}</h1>
+  <h3 class="product-price">{{price}}</h3>
+  <h2 class="product-qty">Quantity: {{inventory}}</h2>
+</div>
 
-<form action="/products/{{id}}/edit" method="get" accept-charset="utf-8">
-  <button type='submit'>EDIT THIS PRODUCT</button>
-</form>
+<div class="single-forms">
+  <form action="/products/{{id}}/edit" method="get" accept-charset="utf-8">
+    <button type='submit'>EDIT THIS PRODUCT</button>
+  </form>
+
+  <form action="/products" method="get" accept-charset="utf-8">
+    <button type='submit'>Back to Products List</button>
+  </form>
+</div>
